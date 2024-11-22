@@ -15,7 +15,7 @@ logger:
 
 
 configs:
-  rundicts: 'config/somsettings/somsettings_units10_brain.yml'
+  rundicts: 'config/somsettings/somsettings_carlenSpont.yml'#now just needed for the directory, the actual somsetting file changes according to input params!
 
 savepath_gen: 'ZENODOPATH/SOMs'
 
