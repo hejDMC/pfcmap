@@ -11,6 +11,8 @@ All code was run on a linux (Ubuntu 22.04) using Python version 3.8
 Requirements are given in requirements.txt
 
 
+To run the code navigate to the code folder and call all scripts from there.
+
 Setting file paths
 ####################
 To run the code, replace the following paths according to your settings:
