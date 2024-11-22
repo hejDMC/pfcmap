@@ -13,10 +13,11 @@ Requirements are given in requirements.txt
 
 Setting file paths
 ####################
-To run the code, replace the following paths according to your settings
-**DANDIPATH** --> where the nwbfiles of the KI dataset are stored. https://dandiarchive.org/dandiset/001260?pos=1
-**ZENODOPATH** --> where the intermediated results are stored. todo: LINK
-**CODEPATH** --> directory in which "pfcmap" was downloaded locally (e.g. /home/username/workspace)
-**LOGPATH** --> directory in which file loggers should be saved (e.g. /home/username/logfolder)
-**FIGDIR** --> directory where figures generated should be saved (e.g. /home/username/pfcmap/figures)
-**IBLPATH** --> directory where you stored the IBL dataset and nwbs. todo: LINK
+To run the code, replace the following paths according to your settings:
+
+- **DANDIPATH** --> where the nwbfiles of the KI dataset are stored. https://dandiarchive.org/dandiset/001260?pos=1
+- **ZENODOPATH** --> where the intermediated results are stored. todo: LINK
+- **CODEPATH** --> directory in which "pfcmap" was downloaded locally (e.g. /home/username/workspace)
+- **LOGPATH** --> directory in which file loggers should be saved (e.g. /home/username/logfolder)
+- **FIGDIR** --> directory where figures generated should be saved (e.g. /home/username/pfcmap/figures)
+- **IBLPATH** --> directory where you stored the IBL dataset and nwbs. todo: LINK
