@@ -11,7 +11,7 @@ All code was run on Linux (Ubuntu 22.04) using Python version 3.8
 Requirements are given in requirements.txt.
 
 
-To run the code, download the repo, navigate to the code folder (path_to_your_directory/pfcmap) and call all scripts from there.
+To run the code, download the repo, navigate to the code folder (path_to_your_directory/pfcmap) and call scripts from there.
 
 Setting file paths
 ####################
