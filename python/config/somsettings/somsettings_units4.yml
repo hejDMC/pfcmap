@@ -1,0 +1,186 @@
+runC00d:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    datasets: ['Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context']#
+    imetrics:
+      features: ['B','LvR','rate']
+      weights: [1,1,1]
+    wmetrics:
+      features: []#['peak2Trough','abRatio','p2tRatio']
+      weights: []#[1,1,1]
+    utypes: 'all'
+    nnodes: 240 #280
+    clustering:
+      ward: [3,4,5,6,7]
+      kmeans: [3,4,7]
+
+runC00dX:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'passive'
+    datasets: ['Carlen']
+    tasks: ['Passive','Aversion','Opto']#
+    imetrics:
+      features: ['B','LvR','rate']
+      weights: [1,1,1]
+    wmetrics:
+      features: []#['peak2Trough','abRatio','p2tRatio']
+      weights: []#[1,1,1]
+    utypes: 'all'
+    nnodes: 210 #x 200
+    clustering:
+      ward: [3,4,5,6,7]
+      kmeans: [4,5]
+
+
+
+
+runAw:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    datasets: ['IBL','Steinmetz','Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context','IBL']#
+    imetrics:
+      features: []#['B','LvR','rate']
+      weights: []#[1,1,1]
+    wmetrics:
+      features: ['peak2Trough','abRatio','p2tRatio']
+      weights: [1,1,1]
+    utypes: 'all'
+    nnodes: 250 #280
+    clustering:
+      ward: [3,5,6]
+
+runCw:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    datasets: ['Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context']#
+    imetrics:
+      features: []#['B','LvR','rate']
+      weights: []#[1,1,1]
+    wmetrics:
+      features: ['peak2Trough','abRatio','p2tRatio']
+      weights: [1,1,1]
+    utypes: 'all'
+    nnodes: 370 #x 200 #280
+    clustering:
+      ward: [3,4]
+      kmeans: [3,4,5]
+
+runAwP:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    datasets: ['IBL','Steinmetz','Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context','IBL']#
+    imetrics:
+      features: []#['B','LvR','rate']
+      weights: []#[1,1,1]
+    wmetrics:
+      features: ['peak2Trough','abRatio','p2tRatio']
+      weights: [1,1,1]
+    utypes: ['ww']
+    nnodes:  250 #280
+    clustering:
+      gmm: [3,5]
+
+runCwP:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    datasets: ['Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context']#
+    imetrics:
+      features: []#['B','LvR','rate']
+      weights: []#[1,1,1]
+    wmetrics:
+      features: ['peak2Trough','abRatio','p2tRatio']
+      weights: [1,1,1]
+    utypes: ['ww']
+    nnodes: 300 #x 200 #280
+    clustering:
+      ward: [3,4,5,6]
+
+runSwP:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    datasets: ['IBL','Steinmetz']
+    tasks: ['IBL']#
+    imetrics:
+      features: []#['B','LvR','rate']
+      weights: []#[1,1,1]
+    wmetrics:
+      features: ['peak2Trough','abRatio','p2tRatio']
+      weights: [1,1,1]
+    utypes: ['ww']
+    nnodes: 200 #x 220 #280
+    clustering:
+      ward: [3,4,5]
+
+runAwI:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    datasets: ['IBL','Steinmetz','Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context','IBL']#
+    imetrics:
+      features: []#['B','LvR','rate']
+      weights: []#[1,1,1]
+    wmetrics:
+      features: ['peak2Trough','abRatio','p2tRatio']
+      weights: [1,1,1]
+    utypes: ['nw']
+    nnodes: 100 #x 100 #280
+    clustering:
+      ward: [2,3,4,5]
+
+runCwI:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    datasets: ['Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context']#
+    imetrics:
+      features: []#['B','LvR','rate']
+      weights: []#[1,1,1]
+    wmetrics:
+      features: ['peak2Trough','abRatio','p2tRatio']
+      weights: [1,1,1]
+    utypes: ['nw']
+    nnodes: 150 #x 120 #280
+    clustering:
+      ward: [2,3,5]
+
+runSwI:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    datasets: ['IBL','Steinmetz']
+    tasks: ['IBL']#
+    imetrics:
+      features: []#['B','LvR','rate']
+      weights: []#[1,1,1]
+    wmetrics:
+      features: ['peak2Trough','abRatio','p2tRatio']
+      weights: [1,1,1]
+    utypes: ['nw']
+    nnodes: 100 #x 120 #280
+    clustering:
+      ward: [3,4,5]
+

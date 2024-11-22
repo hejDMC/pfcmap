@@ -1,0 +1,21 @@
+code:
+  genpath: 'CODEPATH/pfcmap/python'
+  workspace: 'CODEPATH'
+  recretrieval: 'PATHS/general_paths.yml'
+
+plotting:
+  stimdir: 'config/stimplotstyles'
+  style: 'config/presentation.mplstyle'
+
+logger:
+  config_file: 'config/configLogging.yml'
+  out_log: 'LOGPATH/state_detection.log'
+
+configs:
+  offpath: 'PATHS/offstate_paths.yml'
+  transpath: 'transient_paths.yml'
+
+figsavedir: 'FIGDIR/preprocessing/statedection_off_and_trans'
+outdir: 'ZENODOPATH/quiet_active_detection/merged_quiet'
+
+

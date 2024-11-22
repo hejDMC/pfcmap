@@ -1,0 +1,19 @@
+bw: 0.01 #for rate smoothing
+
+gauss_bw: 0.025 #seconds
+savgol_params: [11,3]
+
+mindur_trough: 0.05 #seconds
+maxdur_off: 0.6 #maximal duration of off episode
+
+ratethr_frac: 0.2
+maxint_between_off_sec: 1.5 #otherwise merged into a quiet period,seconds
+
+nmin_super: 3 #minimum number of off periods closer than maxint_between_off_sec to be considered superburst
+
+marg_super_sec: [-1.,1] #seconds
+marg_nonsuper_sec: [-0.3,0.3] #seconds
+
+mindur_free: 1.5 #seconds
+
+nunits_min: 75

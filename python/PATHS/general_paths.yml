@@ -1,0 +1,15 @@
+fig_path: 'FIGDIR/preprocessing'
+
+code: 'CODEPATH/pfcmap/python'
+workspace_dir: 'CODEPATH'
+
+logger:
+  config_file: 'config/configLogging.yml'
+  out_log: 'LOGPATH/mylogging.log'
+logfolder: 'LOGPATH'
+
+datapath: 'ZENODOPATH'
+
+datapath_metricsextraction: 'ZENODOPATH/preprocessing/metrics_extraction'
+
+nwbdir: 'DANDIPATH'

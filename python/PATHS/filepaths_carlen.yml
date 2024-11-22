@@ -1,0 +1,45 @@
+code:
+  genpath: 'CODEPATH/pfcmap/python'
+  workspace: 'CODEPATH'
+  recretrieval: 'PATHS/general_paths.yml'
+
+tablepath: 'config/datatables/allrecs_allprobes.xlsx'
+
+plotting:
+  stimdir: 'config/stimplotstyles'
+  style: 'config/presentation.mplstyle'
+
+logger:
+  config_file: 'config/configLogging.yml'
+  out_log: 'LOGPATH/SOM_units.log'
+
+
+configs:
+  rundicts: 'config/somsettings/somsettings_units10_brain.yml'
+
+savepath_gen: 'ZENODOPATH/SOMs'
+
+
+figdir_root: 'FIGDIR'
+
+
+statsdict_dir: 'ZENODOPATH/enrichments'
+
+tesselation_dir: 'ZENODOPATH/flatmaps'
+
+gao_hierarchy_file: 'ZENODOPATH/ROI_Gao_hierarchy_index.csv'
+
+harris_hierarchy_file: 'ZENODOPATH/hierarchy_summary_CreConf.xlsx'
+
+
+datapath_metricsextraction: 'ZENODOPATH/preprocessing/metrics_extraction'
+
+
+src_dirs:
+  metrics: 'ZENDODOPATH/metrics_files/metric_files_Carlen'
+  responses: 'ZENODOPATH/preprocessing/metrics_extraction/psth_scores'
+  zeta: 'ZENODOPATH/zetascores'
+  nwb_dirpatterns:
+    Carlen: 'DANDIPATH/*/*/*.nwb'
+    IBL: 'IBLPATH/*.nwb'
+

@@ -1,0 +1,24 @@
+code:
+  genpath: 'CODEPATH/pfcmap/python'
+  workspace: 'CODEPATH'
+  recretrieval: 'PATHS/general_paths.yml'
+
+plotting:
+  stimdir: 'config/stimplotstyles'
+  style: 'config/presentation.mplstyle'
+
+logger:
+  config_file: 'config/configLogging.yml'
+  out_log: 'LOGPATH/state_detection.log'
+
+configs:
+  defaultdict: 'configs/config_statedet/offdetection_defaultparams.yaml'
+  functions: 'configs/config_statedet/paramfuncs_offperiod_det.py'
+
+outdir: 'ZENODOPATH/quiet_active_detection/offstates'
+figsavedir: 'FIGDIR/preprocessing/offstates'
+
+
+src_dirs:
+  nwbpath: 'DANDIPATH'
+  lickdir: 'ZENODOPATH/preprocessing/artifacts_licking'

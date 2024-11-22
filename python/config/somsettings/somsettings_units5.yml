@@ -1,0 +1,79 @@
+runC00dHUGE:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    datasets: ['Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context']#
+    imetrics:
+      features: ['B','LvR','rate']
+      weights: [1,1,1]
+    wmetrics:
+      features: []#['peak2Trough','abRatio','p2tRatio']
+      weights: []#[1,1,1]
+    utypes: 'all'
+    nnodes: 2400
+    clustering:
+      ward: [3,4,5,6,7]
+      kmeans: [3,4,7]
+
+
+runC00d_brain:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    datasets: ['Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context']#
+    imetrics:
+      features: ['B','LvR','rate']
+      weights: [1,1,1]
+    wmetrics:
+      features: []#['peak2Trough','abRatio','p2tRatio']
+      weights: []#[1,1,1]
+    utypes: 'all'
+    nnodes: 350
+    clustering:
+      ward: [3,4,5,6,7]
+      kmeans: [3,4,7]
+
+
+runC00dP:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    datasets: ['Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context']#
+    imetrics:
+      features: ['B','LvR','rate']
+      weights: [1,1,1]
+    wmetrics:
+      features: []#['peak2Trough','abRatio','p2tRatio']
+      weights: []#[1,1,1]
+    utypes: ['ww']
+    nnodes: 230 #280
+    clustering:
+      ward: [3,4,5,6,7]
+      kmeans: [3,4,7]
+
+runC00dI:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    datasets: ['Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context']#
+    imetrics:
+      features: ['B','LvR','rate']
+
+      weights: [1,1,1]
+    wmetrics:
+      features: []#['peak2Trough','abRatio','p2tRatio']
+      weights: []#[1,1,1]
+    utypes: ['nw']
+    nnodes: 90 #280
+    clustering:
+      ward: [3,4,5,6,7]
+      kmeans: [3,4,7]
+

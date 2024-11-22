@@ -1,0 +1,30 @@
+version: 1
+disable_existing_loggers: True
+
+formatters:
+    simpleFormater:
+        format: '%(asctime)s  [%(levelname)-5.5s] |%(module)s %(funcName)s|  %(message)s'
+
+handlers:
+    console:
+        class: logging.StreamHandler
+        formatter: simpleFormater
+        level: INFO
+        stream: ext://sys.stdout
+    file:
+        class : logging.FileHandler
+        formatter: simpleFormater
+        level: DEBUG
+        filename: temp.log
+
+loggers:
+    clogger:
+        level: INFO
+        handlers: [console]
+    flogger:
+        level: INFO
+        handlers: [file]
+
+root:
+    level: INFO
+    handlers: [console, file]

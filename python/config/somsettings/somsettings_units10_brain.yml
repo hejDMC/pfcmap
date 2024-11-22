@@ -1,0 +1,139 @@
+runC00dMP1_brain:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    spec: 'dur1'
+    datasets: ['Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context','Attention']#
+    imetrics:
+      features: ['B_mean','M_mean','rate_mean']
+      weights: [1,1,1]
+    wmetrics:
+      features: []#['peak2Trough','abRatio','p2tRatio']
+      weights: []#[1,1,1]
+    utypes: ['ww']
+    nnodes: 400
+    clustering:
+      ward: [5,6,7]
+
+
+runC00dMI1_brain:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    spec: 'dur1'
+    datasets: ['Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context','Attention']#
+    imetrics:
+      features: ['B_mean','M_mean','rate_mean']
+      weights: [1,1,1]
+    wmetrics:
+      features: []#['peak2Trough','abRatio','p2tRatio']
+      weights: []#[1,1,1]
+    utypes: ['nw']
+    nnodes: 220
+    clustering:
+      ward: [5,6,7]
+
+
+runC00dMP2_brain:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    spec: 'dur2'
+    datasets: ['Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context','Attention']#
+    imetrics:
+      features: ['B_mean','M_mean','rate_mean']
+      weights: [1,1,1]
+    wmetrics:
+      features: []#['peak2Trough','abRatio','p2tRatio']
+      weights: []#[1,1,1]
+    utypes: ['ww']
+    nnodes: 400
+    clustering:
+      ward: [5,6,7]
+
+
+runC00dMI2_brain:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    spec: 'dur2'
+    datasets: ['Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context','Attention']#
+    imetrics:
+      features: ['B_mean','M_mean','rate_mean']
+      weights: [1,1,1]
+    wmetrics:
+      features: []#['peak2Trough','abRatio','p2tRatio']
+      weights: []#[1,1,1]
+    utypes: ['nw']
+    nnodes: 220
+    clustering:
+      ward: [5,6,7]
+
+
+runC00dMP3_brain:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    spec: 'dur3'
+    datasets: ['Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context','Attention']#
+    imetrics:
+      features: ['B_mean','M_mean','rate_mean']
+      weights: [1,1,1]
+    wmetrics:
+      features: []#['peak2Trough','abRatio','p2tRatio']
+      weights: []#[1,1,1]
+    utypes: ['ww']
+    nnodes: 400
+    clustering:
+      ward: [6,7,8,9]
+
+
+runC00dMI3_brain:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    spec: 'dur3'
+    datasets: ['Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context','Attention']#
+    imetrics:
+      features: ['B_mean','M_mean','rate_mean']
+      weights: [1,1,1]
+    wmetrics:
+      features: []#['peak2Trough','abRatio','p2tRatio']
+      weights: []#[1,1,1]
+    utypes: ['nw']
+    nnodes: 220
+    clustering:
+      ward: [5,6,7,8,9]
+
+
+
+runC00dM3_brain:
+    state: 'active'
+    tsel: 'prestim'
+    layerlist: 'all'
+    reftag: 'all'
+    spec: 'dur3'
+    datasets: ['Carlen']
+    tasks: ['Passive','Aversion','Opto','Detection','Context','Attention']#
+    imetrics:
+      features: ['B_mean','M_mean','rate_mean']
+      weights: [1,1,1]
+    wmetrics:
+      features: []#['peak2Trough','abRatio','p2tRatio']
+      weights: []#[1,1,1]
+    utypes: 'all'
+    nnodes: 600
+    clustering:
+      ward: [5,6,7]
