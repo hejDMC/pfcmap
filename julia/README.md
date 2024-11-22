@@ -29,4 +29,4 @@ The code uses RCall to run the Linear Mixed Model statistics (lme4, emmeans, pbk
 
 ## Allen CCF Julia tools
 
-The code also calls tools to work with the Allen Brain Institute CCFv3 data. These tools are currently under development here (TODO: Link).
+The code also calls tools to work with the Allen Brain Institute CCFv3 data. These tools are currently under development [here](https://github.com/PierreLeMerre/allenCCF_julia).
