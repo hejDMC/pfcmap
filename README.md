@@ -10,4 +10,4 @@ The table **code_to_panels.xlsx** provides an overview of which script was run t
 
 - NWB files of the KI dataset: https://dandiarchive.org/dandiset/001260
 - International Brain Lab (IBL) dataset: https://registry.opendata.aws/ibl-brain-wide-map
-- Intermediated results and preprocessing data: https://zenodo.org/records/14205018
+- Intermediate results and preprocessing data: https://zenodo.org/records/14205018
