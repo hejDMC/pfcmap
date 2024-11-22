@@ -4,3 +4,10 @@ The custom code was written in **julia** and **python** and is contained in the 
 To run the code and for further details, consult the README files in julia and python folder.
 
 The table **code_to_panels.xlsx** provides an overview of which script was run to generate specific panels.
+
+
+### Data used
+
+- NWB files of the KI dataset: https://dandiarchive.org/dandiset/001260
+- International Brain Lab (IBL) dataset: https://registry.opendata.aws/ibl-brain-wide-map
+- Intermediate results and preprocessing data: https://zenodo.org/records/14205018
