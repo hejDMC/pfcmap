@@ -35,7 +35,7 @@ Nmin_maps = 20
 niter = 200
 
 ntints_min = 12
-timescalepath =  'ZENODOPATH/preprocessing/metrics_extraction'
+metricsextr_path =  'ZENODOPATH/preprocessing/metrics_extraction'
 
 response_path = 'ZENODOPATH/preprocessing/metrics_extraction/psth_scores'
 responsefile_pattern = 'RECID__TSELpsth2to7__STATEmystate__all_psth_ks10__PCAscoresMODE.h5'#--> replace recid, mystate,MODE

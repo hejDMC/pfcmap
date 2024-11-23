@@ -22,9 +22,9 @@ from pfcmap.python.utils import evol_helpers as ehelpers
 from pfcmap.python import settings as S
 
 rundict_path = pathdict['configs']['rundicts']
-srcdir = pathdict['datapath_metricsextraction'] +'/quantities_all_meanvar/Carlen_quietactive_detail'
+srcdir = pathdict['metricsextraction'] +'/quantities_all_meanvar/Carlen_quietactive_detail'
 statstag = 'TSELprestim3__STATEactive__all'
-savepath_evol = os.path.join(pathdict['savepath_gen'].replace('SOMs','category_evolutions'))
+savepath_evol = os.path.join(pathdict['savepath_SOM'].replace('SOMs','category_evolutions'))
 
 
 tints_per_block = 50
@@ -36,7 +36,7 @@ endtag = '%s_quantities_detail.h5'%statstag
 
 rundict_folder = os.path.dirname(rundict_path)
 rundict = uloader.get_myrun(rundict_folder,myrun)
-somfile = uloader.get_somfile(rundict,myrun,pathdict['savepath_gen'])
+somfile = uloader.get_somfile(rundict,myrun,pathdict['savepath_SOM'])
 somdict = uloader.load_som(somfile)
 somfeats = somdict['features']
 

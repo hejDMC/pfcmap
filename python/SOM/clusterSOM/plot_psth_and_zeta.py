@@ -36,7 +36,7 @@ rundict_path = pathdict['configs']['rundicts']
 srcdir = pathdict['src_dirs']['metrics']
 zeta_dir =  os.path.join(pathdict['src_dirs']['zeta'],'%s__%s%s'%(myrun,cmethod,ncluststr))
 
-savepath_gen = pathdict['savepath_gen']
+savepath_SOM = pathdict['savepath_SOM']
 
 
 with open(pathpath, 'r') as myfile: pathdict = yaml.safe_load(myfile)
@@ -46,7 +46,7 @@ from pfcmap.python import settings as S
 from pfcmap.python.utils import som_helpers as somh
 
 
-psth_dir = os.path.join(S.timescalepath,'psth')
+psth_dir = os.path.join(S.metricsextr_path,'psth')
 
 statsfn = S.enr_fn
 
@@ -57,7 +57,7 @@ plt.style.use(stylepath)
 rundict_folder = os.path.dirname(rundict_path)
 rundict = uloader.get_myrun(rundict_folder,myrun)
 
-somfile = uloader.get_somfile(rundict,myrun,savepath_gen)
+somfile = uloader.get_somfile(rundict,myrun,savepath_SOM)
 somdict = uloader.load_som(somfile)
 cmap = mpl.cm.get_cmap(S.cmap_clust)#
 

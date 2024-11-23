@@ -20,8 +20,8 @@ pathpath2 = 'PATHS/filepaths_IBL.yml'
 with open(pathpath, 'r') as myfile: pathdict = yaml.safe_load(myfile)
 with open(pathpath2, 'r') as myfile: pathdict2 = yaml.safe_load(myfile)
 
-srcdir = pathdict['datapath_metricsextraction'] +'/quantities_all_meanvar/Carlen_quietactive'
-srcdir2 = pathdict2['datapath_metricsextraction']+ '/quantities_all_meanvar/IBL_Passive'
+srcdir = pathdict['metricsextraction'] +'/quantities_all_meanvar/Carlen_quietactive'
+srcdir2 = pathdict2['metricsextraction']+ '/quantities_all_meanvar/IBL_Passive'
 
 figdir_mother = pathdict['figdir_root'] + '/quiet_active_IBL_featurecontrast/QAI_feature_distributions'
 

@@ -36,12 +36,12 @@ from pfcmap.python.utils import unitloader as uloader
 gao_hier_path = pathdict['gao_hierarchy_file']
 rundict_path = pathdict['configs']['rundicts']
 srcdir = pathdict['src_dirs']['metrics']
-savepath_gen = pathdict['savepath_gen']
+savepath_SOM = pathdict['savepath_SOM']
 
 rundict_folder = os.path.dirname(rundict_path)
 rundict = uloader.get_myrun(rundict_folder,myrun)
 
-somfile = uloader.get_somfile(rundict,myrun,savepath_gen)
+somfile = uloader.get_somfile(rundict,myrun,savepath_SOM)
 somdict = uloader.load_som(somfile)
 
 kshape = somdict['kshape']

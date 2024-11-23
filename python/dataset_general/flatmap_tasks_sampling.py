@@ -18,7 +18,7 @@ tesselation_dir = pathdict['tesselation_dir']
 
 rundict_path = pathdict['configs']['rundicts']
 srcdir = pathdict['src_dirs']['metrics']
-savepath_gen = pathdict['savepath_gen']
+savepath_SOM = pathdict['savepath_SOM']
 
 sys.path.append(pathdict['code']['workspace'])
 from pfcmap.python.utils import unitloader as uloader

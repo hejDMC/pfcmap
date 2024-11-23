@@ -17,7 +17,7 @@ outfilename_recwise = os.path.join(savedir_output,'recwise_regionlayerstats__%s.
 
 rundict_path = pathdict['configs']['rundicts']
 srcdir = pathdict['src_dirs']['metrics']
-savepath_gen = pathdict['savepath_gen']
+savepath_SOM = pathdict['savepath_SOM']
 
 
 with open(pathpath, 'r') as myfile: pathdict = yaml.safe_load(myfile)

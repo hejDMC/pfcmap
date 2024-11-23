@@ -283,7 +283,7 @@ def load_all_units_for_som(filenames,rundict,check_pfc=True,rois_from_path=True,
         tintcheck = True
         #print('here',len(rundict['rmetrics']['features']),recid)
         if len(rundict['imetrics']['features'])>0 or len(rundict['rmetrics']['features'])>0:
-            tintfile = get_tintfile_rec(recid, dataset, rundict, timescalepath=S.timescalepath)
+            tintfile = get_tintfile_rec(recid, dataset, rundict, metricsextr_path=S.metricsextr_path)
             #print('tintfile',tintfile)
             #print('tintfile %s'%tintfile)
             with h5py.File(tintfile, 'r') as hand: ntints = hand['tints'][()].shape[0]
@@ -361,11 +361,11 @@ def load_all_units_for_som(filenames,rundict,check_pfc=True,rois_from_path=True,
 
 
 
-def get_tintfile_rec(recid,dataset,rundict,timescalepath =S.timescalepath):
+def get_tintfile_rec(recid,dataset,rundict,metricsextr_path =S.metricsextr_path):
     reftag = '__all' if rundict['reftag'] == 'all' else ''
     if dataset == 'Carlen':
         if rundict['tsel'] == 'response':
-            tintfilepath = os.path.join(timescalepath,'timeselections_psth')
+            tintfilepath = os.path.join(metricsextr_path,'timeselections','timeselections_psth')
             #print('tfilepath',tintfilepath)
             #responsetint_pattern =  'RECID__TSELpsth2to7__STATEmystateREFTAG.h5'
             repl_dict = {'RECID': recid, 'mystate': rundict['state'], 'REFTAG': reftag}
@@ -374,25 +374,27 @@ def get_tintfile_rec(recid,dataset,rundict,timescalepath =S.timescalepath):
             #print('mytintfile', tintfile)
 
         else:
-            tintfilepath = os.path.join(timescalepath, 'timeselections_quietactive')
+            tintfilepath = os.path.join(metricsextr_path,'timeselections', 'timeselections_quietactive')
             tintfile =  os.path.join(tintfilepath, '%s__TSEL%s%s__STATE%s%s.h5' % (recid, rundict['tsel'], \
                                                                                    rundict['spec'].replace('dur',''),rundict['state'],reftag))
 
-    else:
-        tintfilepath = os.path.join(timescalepath, 'timeselections_external', dataset)
+    elif dataset.count('IBL'):
+        tintfilepath = os.path.join(metricsextr_path, 'timeselections', 'timeselections_IBL_Passive')
         tintfile = glob(os.path.join(tintfilepath, '%s*__TSEL%s%s.h5' % (recid, rundict['tsel'],rundict['spec'].replace('dur',''))))
         assert len(tintfile) == 1, 'not exactly one tintfile %s'%(str(tintfile))
         tintfile = tintfile[0]
+    else:
+        assert 0, 'please define timeselection path for dataset %s'%(dataset)
     assert os.path.isfile(tintfile),'does not exist tintfile %s'%(tintfile)
 
     return tintfile
 
 
-def get_tintfile(U,rundict,timescalepath = S.timescalepath):
-    return get_tintfile_rec(U.recid,U.dataset,rundict,timescalepath = timescalepath)
+def get_tintfile(U,rundict,metricsextr_path = S.metricsextr_path):
+    return get_tintfile_rec(U.recid,U.dataset,rundict,metricsextr_path = metricsextr_path)
 
-def get_ntints(U,rundict,timescalepath = S.timescalepath):
-    tintfile = get_tintfile(U, rundict,timescalepath)
+def get_ntints(U,rundict,metricsextr_path = S.metricsextr_path):
+    tintfile = get_tintfile(U, rundict,metricsextr_path)
     with h5py.File(tintfile,'r') as hand: ntints = hand['tints'][()].shape[0]
     return ntints
 
@@ -506,11 +508,11 @@ def get_myrun(rundict_folder,myrun,print_mother=True):
             return rsuper[myrun]
     return None
 
-def get_somfile(rundict,myrun,savepath_gen):
-    somfile = glob(os.path.join(savepath_gen, '%s_SOM_kShape*.h5' % myrun))
+def get_somfile(rundict,myrun,savepath_SOM):
+    somfile = glob(os.path.join(savepath_SOM, '%s_SOM_kShape*.h5' % myrun))
 
     if is_projection(rundict):
-        somfile = glob(os.path.join(savepath_gen, '%s_SOM_kShape*.h5' % rundict['srcrun']))
+        somfile = glob(os.path.join(savepath_SOM, '%s_SOM_kShape*.h5' % rundict['srcrun']))
         print('getting somfile from external run %s' % rundict['srcrun'])
     assert len(somfile) == 1, 'not exactly one somfile matching found %s' % (str(somfile))
 

@@ -41,7 +41,7 @@ figdir_mother = os.path.join(figdir_base,'%s__vs__%s'%(run2,run1))
 
 rundict_path = pathdict['configs']['rundicts']
 srcdir = pathdict['src_dirs']['metrics']
-savepath_gen = pathdict['savepath_gen']
+savepath_SOM = pathdict['savepath_SOM']
 
 stylepath = os.path.join(pathdict['plotting']['style'])
 plt.style.use(stylepath)
@@ -64,7 +64,7 @@ for stag,myrun,ncluststr in zip(stags,[run1,run2],[ncluststr1,ncluststr2]):
     metricsfiles = S.get_metricsfiles_auto(rundict,srcdir,tablepath=pathdict['tablepath'])
     Units_temp,somfeats,weightvec =  uloader.load_all_units_for_som(metricsfiles,rundict,check_pfc= (not myrun.count('_brain')))
 
-    somfile = uloader.get_somfile(rundict,myrun,savepath_gen)
+    somfile = uloader.get_somfile(rundict,myrun,savepath_SOM)
     somdict = uloader.load_som(somfile)
     assert (somfeats == somdict['features']).all(), 'mismatching features'
     assert (weightvec == somdict['featureweights']).all(), 'mismatching weights'

@@ -15,7 +15,7 @@ with open(pathpath) as yfile: pathdict = yaml.safe_load(yfile)
 
 rundict_path = pathdict['configs']['rundicts']
 srcdir = pathdict['src_dirs']['metrics']
-savepath_gen = pathdict['savepath_gen']
+savepath_SOM = pathdict['savepath_SOM']
 
 
 with open(pathpath, 'r') as myfile: pathdict = yaml.safe_load(myfile)
@@ -31,7 +31,7 @@ rundict = uloader.get_myrun(rundict_folder,myrun)
 stylepath = os.path.join(pathdict['plotting']['style'])
 plt.style.use(stylepath)
 
-somfile = uloader.get_somfile(rundict,myrun,savepath_gen)
+somfile = uloader.get_somfile(rundict,myrun,savepath_SOM)
 somdict = uloader.load_som(somfile)
 
 

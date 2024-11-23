@@ -43,7 +43,7 @@ def replace_by_dict(mytxt,repldict):
 tintdict = {}
 for recid in recids:
     tintdict[recid] = {}
-    tintfilepath = os.path.join(S.timescalepath, timeselsubfolder)
+    tintfilepath = os.path.join(S.metricsextr_path, 'timeselections',timeselsubfolder)
     for mystate in states:
         if runset.count('spont'):
             tintfile =  os.path.join(tintfilepath, '%s__TSEL%s%s__STATE%s%s.h5' % (recid, tsel, spec.replace('dur',''),\

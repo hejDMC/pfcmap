@@ -17,7 +17,7 @@ with open(pathpath) as yfile: pathdict = yaml.safe_load(yfile)
 
 rundict_path = pathdict['configs']['rundicts']
 srcdir = pathdict['src_dirs']['metrics']
-savepath_gen = pathdict['savepath_gen']
+savepath_SOM = pathdict['savepath_SOM']
 
 
 with open(pathpath, 'r') as myfile: pathdict = yaml.safe_load(myfile)
@@ -34,7 +34,7 @@ rundict_folder = os.path.dirname(rundict_path)
 rundict = uloader.get_myrun(rundict_folder,myrun)
 
 
-somfile = uloader.get_somfile(rundict,myrun,savepath_gen)
+somfile = uloader.get_somfile(rundict,myrun,savepath_SOM)
 somdict = uloader.load_som(somfile)
 
 
@@ -91,7 +91,7 @@ showtints_min = 100 if not rundict['datasets'] == ['IBL_Passive'] else 90
 recids_allowed = []
 recids_temp = np.unique([[U.recid,U.dataset] for U in Units],axis=0)
 for recid,mydataset in recids_temp:
-    tintfile = uloader.get_tintfile_rec(recid, mydataset, rundict, timescalepath=S.timescalepath)
+    tintfile = uloader.get_tintfile_rec(recid, mydataset, rundict, metricsextr_path=S.metricsextr_path)
     with h5py.File(tintfile, 'r') as hand: ntints = hand['tints'][()].shape[0]
     if ntints>=showtints_min:
         recids_allowed.append(recid)
@@ -103,13 +103,13 @@ borders = np.array([-0.25,0.25])
 
 
 def get_tintfile(U):
-    tintfile = uloader.get_tintfile_rec(recid,U.dataset,rundict,timescalepath=S.timescalepath)
+    tintfile = uloader.get_tintfile_rec(recid,U.dataset,rundict,metricsextr_path=S.metricsextr_path)
     return tintfile
 getspikes = lambda stimes,tinterval: stimes[(stimes>=tinterval[0]) & (stimes<=tinterval[1])]
 
 
 reftag = 'refall'
-psth_dir = os.path.join(S.timescalepath,'psth')
+psth_dir = os.path.join(S.metricsextr_path,'psth')
 def get_psth(U):
     repl_dict = {'RECID': U.recid, 'mystate': rundict['state'], 'REFTAG': reftag,'__PCAscoresMODE':''}
     psthfile_tag = uloader.replace_by_dict(S.responsefile_pattern, repl_dict)
@@ -162,7 +162,7 @@ for key in usel_dict.keys():
             spiketimes = hand['units/spike_times'][r0:r1]
         psth_normed, psth_tvec = get_psth(U)
 
-        tintfile = uloader.get_tintfile(U, rundict, timescalepath=S.timescalepath)
+        tintfile = uloader.get_tintfile(U, rundict, metricsextr_path=S.metricsextr_path)
 
         with h5py.File(tintfile, 'r') as hand:
             tints = hand['tints'][()]

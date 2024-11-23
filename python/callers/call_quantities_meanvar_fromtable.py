@@ -10,7 +10,7 @@ import numpy as np
 print ('starting script Meanvar Quantities!')
 pathpath = 'PATHS/general_paths.yml'
 with open(pathpath,'r') as f: pdict = yaml.safe_load(f)
-genpath = pdict['datapath_metricsextraction']
+genpath = pdict['metricsextraction']
 
 
 script = 'metrics_extraction/spontaneous/extract_quantities_meanvar.py'

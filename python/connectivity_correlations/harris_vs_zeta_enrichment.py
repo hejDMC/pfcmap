@@ -29,7 +29,7 @@ with open(pathpath) as yfile: pathdict = yaml.safe_load(yfile)
 
 rundict_path = pathdict['configs']['rundicts']
 srcdir = pathdict['src_dirs']['metrics']
-savepath_gen = pathdict['savepath_gen']
+savepath_SOM = pathdict['savepath_SOM']
 tablepath_hierarchy =  pathdict['harris_hierarchy_file']
 genfigdir = pathdict['figdir_root'] + '/hierarchy/harris_correlations_zeta'
 
@@ -59,7 +59,7 @@ zeta_pattern = 'RECID__%s__%s%s__TSELpsth2to7__STATEactive__all__zeta.h5'%(myrun
 zeta_dir =  os.path.join(pathdict['src_dirs']['zeta'],'%s__%s%s'%(myrun,cmethod,ncluststr))
 
 
-somfile = uloader.get_somfile(rundict,myrun,savepath_gen)
+somfile = uloader.get_somfile(rundict,myrun,savepath_SOM)
 somdict = uloader.load_som(somfile)
 
 kshape = somdict['kshape']

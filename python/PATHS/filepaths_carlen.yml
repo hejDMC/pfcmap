@@ -17,7 +17,7 @@ logger:
 configs:
   rundicts: 'config/somsettings/somsettings_carlenSpont.yml'#now just needed for the directory, the actual somsetting file changes according to input params!
 
-savepath_gen: 'ZENODOPATH/SOMs'
+savepath_SOM: 'ZENODOPATH/SOMs'
 
 
 figdir_root: 'FIGDIR'
@@ -32,7 +32,7 @@ gao_hierarchy_file: 'ZENODOPATH/ROI_Gao_hierarchy_index.csv'
 harris_hierarchy_file: 'ZENODOPATH/hierarchy_summary_CreConf.xlsx'
 
 
-datapath_metricsextraction: 'ZENODOPATH/preprocessing/metrics_extraction'
+metricsextraction: 'ZENODOPATH/preprocessing/metrics_extraction'
 
 
 src_dirs:

@@ -17,7 +17,7 @@ with open(pathpath, 'r') as myfile: pathdict = yaml.safe_load(myfile)
 
 rundict_path = pathdict['configs']['rundicts']
 srcdir = pathdict['src_dirs']['metrics']
-savepath_gen = pathdict['savepath_gen']
+savepath_SOM = pathdict['savepath_SOM']
 
 tesselation_dir = pathdict['tesselation_dir']
 

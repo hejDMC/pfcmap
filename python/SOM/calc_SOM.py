@@ -14,7 +14,7 @@ with open(pathpath, 'r') as myfile: pathdict = yaml.safe_load(myfile)
 
 rundict_path = pathdict['configs']['rundicts']
 srcdir = pathdict['src_dirs']['metrics']
-savepath_gen = pathdict['savepath_gen']
+savepath_SOM = pathdict['savepath_SOM']
 
 sys.path.append(pathdict['code']['workspace'])
 from pfcmap.python.utils import som_helpers as somh
@@ -65,6 +65,6 @@ te = somh.get_topologicalError(wmat, weights, kshape)
 
 
 
-somsavepath = os.path.join(savepath_gen,'%s_SOM_kShape%i_%i.h5'%(myrun,kshape[0],kshape[1]))
+somsavepath = os.path.join(savepath_SOM,'%s_SOM_kShape%i_%i.h5'%(myrun,kshape[0],kshape[1]))
 uloader.save_som(somsavepath,myrun,rundict,kshape,weights,weightvec,refmean,refstd,somfeats,qe,te,recids,S.niter)
 #somdict = uloader.load_som(somsavepath)

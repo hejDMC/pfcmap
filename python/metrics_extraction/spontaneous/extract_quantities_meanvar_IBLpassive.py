@@ -18,7 +18,7 @@ ttag = 'passive'
 
 pathpath = 'PATHS/general_paths.yml'
 srcdir = 'IBLPATH/IBL_Passive'
-tintfile_dir = 'ZENODOPATH/preprocessing/timeselections/timeselections_IBL'
+tintfile_dir = 'ZENODOPATH/preprocessing/timeselections/timeselections_IBL_Passive'
 dstpath = 'ZENODOPATH/preprocessing/metrics_extraction/quantities_all_meanvar/IBL_Passive'
 
 with open(pathpath) as yfile: pdict = yaml.safe_load(yfile)

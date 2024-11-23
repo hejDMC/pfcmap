@@ -16,7 +16,7 @@ with open(pathpath) as yfile: pathdict = yaml.safe_load(yfile)
 
 rundict_path = pathdict['configs']['rundicts']
 srcdir = pathdict['src_dirs']['metrics']
-savepath_gen = pathdict['savepath_gen']
+savepath_SOM = pathdict['savepath_SOM']
 
 
 with open(pathpath, 'r') as myfile: pathdict = yaml.safe_load(myfile)
@@ -34,7 +34,7 @@ plt.style.use(stylepath)
 rundict_folder = os.path.dirname(rundict_path)
 rundict = uloader.get_myrun(rundict_folder,myrun)
 
-somfile = uloader.get_somfile(rundict,myrun,savepath_gen)
+somfile = uloader.get_somfile(rundict,myrun,savepath_SOM)
 somdict = uloader.load_som(somfile)
 cmap = mpl.cm.get_cmap(S.cmap_clust)#
 

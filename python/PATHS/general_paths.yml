@@ -10,6 +10,6 @@ logfolder: 'LOGPATH'
 
 datapath: 'ZENODOPATH'
 
-datapath_metricsextraction: 'ZENODOPATH/preprocessing/metrics_extraction'
+metricsextraction: 'ZENODOPATH/preprocessing/metrics_extraction'
 
 nwbdir: 'DANDIPATH'

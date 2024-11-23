@@ -14,11 +14,9 @@ with open(pathpath, 'r') as myfile: pathdict = yaml.safe_load(myfile)
 sys.path.append(pathdict['code']['workspace'])
 from pfcmap.python import settings as S
 
-timeselsubfolder = 'timeselections_external'
-dataset = 'IBL_Passive'
 metrics_dir =  pathdict['src_dirs']['metrics']
 
-tintfilepath = os.path.join(S.timescalepath, timeselsubfolder, dataset)
+tintfilepath = os.path.join(S.metricsextr_path, 'timeselections', 'timeselections_IBL_Passive')
 
 
 metrfiles =  glob(os.path.join(metrics_dir,'*'))

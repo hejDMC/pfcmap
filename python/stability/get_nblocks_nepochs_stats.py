@@ -23,7 +23,7 @@ from pfcmap.python.utils import evol_helpers as ehelpers
 from pfcmap.python import settings as S
 
 statstag = 'TSELprestim3__STATEactive__all'
-savepath_evol = os.path.join(pathdict['savepath_gen'].replace('SOMs','category_evolutions'))
+savepath_evol = os.path.join(pathdict['savepath_SOM'].replace('SOMs','category_evolutions'))
 genfigdir = pathdict['figdir_root'] + '/stability'
 
 tasks_sorted = ['Passive','Attention','Aversion_ctrl','Aversion_stim','Context','Detection']#later in the script, it will be checked whether those are all available

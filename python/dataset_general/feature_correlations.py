@@ -17,7 +17,7 @@ with open(pathpath) as yfile: pathdict = yaml.safe_load(yfile)
 
 rundict_path = pathdict['configs']['rundicts']
 srcdir = pathdict['src_dirs']['metrics']
-savepath_gen = pathdict['savepath_gen']
+savepath_SOM = pathdict['savepath_SOM']
 
 savedir_output = os.path.join(pathdict['figdir_root'],'SOMruns',myrun,'%s__corrstats'%myrun)
 
