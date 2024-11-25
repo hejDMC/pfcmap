@@ -25,7 +25,7 @@ missing_tints = []
 
 
 
-tintfilepath = os.path.join(genpath,timeselfolder)
+tintfilepath = os.path.join(genpath,'timeselections',timeselfolder)
 
 
 nwbdir = pdict['nwbdir']

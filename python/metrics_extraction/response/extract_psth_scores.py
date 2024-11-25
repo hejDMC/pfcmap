@@ -11,7 +11,6 @@ pathpath = 'PATHS/general_paths.yml'
 with open(pathpath,'r') as f: pdict = yaml.safe_load(f)
 genpath = pdict['metricsextraction']
 dstpath = os.path.join(genpath,'psth_scores')
-timeselfolder = 'timeselections_psth' #'timeselections'
 psth_path = os.path.join(genpath,'psth')
 figpath = pdict['fig_path']+'/psth_pca'
 stylepath = 'config/presentation.mplstyle'
