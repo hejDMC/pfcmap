@@ -4,7 +4,7 @@ using NaNStatistics
 using Statistics
 
 # MAIN PATH
-DANDIPATH = "Your/Path/To/DandiSet/"
+DANDIPATH = "/Volumes/labs/dmclab/Pierre/NPX_Database/mPFC/Passive/" #"Your/Path/To/DandiSet/"
 
 # FIGURE PATH
 FIGPATH = "Your/path/to/figures"
@@ -13,14 +13,14 @@ FIGPATH = "Your/path/to/figures"
 include("Utils/simple_raster_units.jl")
 include("Utils/simple_PSTH.jl")
 
-# PARAMETERS FRO PLOTTING
+# PARAMETERS FOR PLOTTING
 # Regions
-pfc_regions = ["MOs" "FRP" "ACAd" "ACAv" "PL" "ILA" "ORBm" "ORBvl" "ORBl" "AId" "AIv"]
+pfc_regions = ["MOs" "FRP" "ACAd2/3" "ACAd5" "ACAv" "PL" "ILA" "ORBm" "ORBvl" "ORBl" "AId" "AIv" ]
 # Colors
 pfc_colors = [colorant"#92A691",  colorant"#4B6A2E", colorant"#e8cd00", 
-              colorant"#e5a106", colorant"#CE6161", colorant"#9F453B", 
-              colorant"#5A8DAF", colorant"#3D6884", colorant"#505770", 
-              colorant"#BA80B6", colorant"#775B8A", colorant"#81AC84"]
+              colorant"#e8cd00", colorant"#e5a106", colorant"#CE6161", 
+              colorant"#9F453B", colorant"#5A8DAF", colorant"#3D6884", 
+              colorant"#505770", colorant"#BA80B6", colorant"#775B8A", colorant"#81AC84"]
 # Bin size
 bin_sz = 0.01
 #window to plot in sec, values here around a sound. 
