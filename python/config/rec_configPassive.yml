@@ -1,0 +1,38 @@
+artifacts:
+  pre: 5.
+  post: 5.
+  mindur_free: 40.
+
+boring_trialkeys: ['Block','id','start_time','stop_time']
+
+stimulus:
+  dur: 0.2 #seconds
+  name_replacedict:
+    optogenetics: sound_brownnoise
+  param_replacedict:
+    sound_amp:
+      5: 1
+      4: 1
+      3: 1
+      2: 1
+
+
+trial_cutout:
+  pre_stim: 1.
+  post_stim: 2.
+
+
+
+pfc_set: ['MOs','ACA','PL','ORB','ILA']
+
+plotting:
+  height_ratios:
+    arts: 0.2
+    stim: 0.2
+    lfp: 0.6
+    units: 0.5
+    oszis: 0.5
+    spect: 0.5
+    emg: 0.4
+    eye: 0.4
+    face: 0.4

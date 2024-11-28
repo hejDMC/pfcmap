@@ -1,0 +1,25 @@
+h5export:
+  LFP_data: '/processing/LFP/data'
+  chan_inds: '/processing/LFP/chan_indices'
+  sr_path: '/processing/LFP/data'
+  chan_bools: 'general/extracellular_ephys/electrodes/column_bool'
+  electrodes: 'general/extracellular_ephys/electrodes'
+  LFP_artifacts: 'analysis/LFP saturation XXX/timestamps'
+  trialids: 'intervals/trials/id'
+  trialXXX_time: 'intervals/trials/XXX_time'
+  stimpres: 'stimulus/presentation'
+  emg: 'processing/ecephys/EMG/ElectricalSeries'
+  lick: 'processing/behavior/Lick/lick/timestamps'
+
+nwb:
+  LFP_data: 'processing/ecephys/LFP/ElectricalSeries/data'
+  chan_inds: 'general/extracellular_ephys/electrodes/id'
+  sr_path: 'processing/ecephys/LFP/ElectricalSeries/starting_time'
+  electrodes: 'general/extracellular_ephys/electrodes'
+  LFP_artifacts: 'analysis/LFP saturation XXX/timestamps'
+  trialids: 'intervals/trials/id'
+  trialXXX_time: 'intervals/trials/XXX_time'
+  stimpres: 'stimulus/presentation'
+  emg: 'processing/ecephys/EMG/ElectricalSeries'
+  lick: 'processing/behavior/Lick/lick/timestamps'
+
