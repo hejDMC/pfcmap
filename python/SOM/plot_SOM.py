@@ -33,8 +33,6 @@ from pfcmap.python.utils import unitloader as uloader
 from pfcmap.python.utils import som_helpers as somh
 from pfcmap.python import settings as S
 from pfcmap.python.utils import som_plotting as somp
-from pfcmap.python.utils.SOM import helper as helper
-from pfcmap.python.utils import plotting_basics as pb
 
 rundict_folder = os.path.dirname(rundict_path)
 rundict = uloader.get_myrun(rundict_folder,myrun)
@@ -545,95 +543,6 @@ figsaver(f, 'nrecs/nunits_per_nrecs')
 
 
 
-
-
-
-####FOR EACH REC individually: where do the elecs land?
-if plot_example_recs:
-    n_example_recs = 20
-    sizefac =0.7
-    hw_hex = 0.35
-    jit = hw_hex*sizefac*0.75
-    cmap = 'jet'
-    maxd = 0.04*1000#between coords
-
-    showds = ['Carlen']
-    recids_subsel = np.unique([U.recid for U in Units if U.dataset in showds ])
-    example_recs = np.random.choice(recids_subsel,size=n_example_recs,replace=False)
-
-    dataset_dict = {recid: [U.dataset for U in Units if U.recid==recid][0] for recid in example_recs}
-
-    nwb_dirs = pathdict['src_dirs']['nwb_dirpatterns']
-    nwbpool =  [item for sublist in [glob(nwb_dirs[dset]) for dset in showds] for item in sublist]#possible files
-
-    anat_refdict = uloader.get_anatref(nwbpool,example_recs,dataset_dict)
-
-    mycmap = mpl.cm.get_cmap(cmap)
-    fwidth,fheight,l_w,r_w,b_h,t_h,xmin,xmax,ymin,ymax = somp.get_figureparams(kshape,hw_hex=hw_hex,sizefac=sizefac)
-    hex_dict =  somp.get_hexgrid(kshape,hw_hex=hw_hex*sizefac)
-    add_width = 1
-    #breakstr  = 'PL031'
-    #fname = [f for f in filenames if f.count(breakstr)][0]
-    for recid in example_recs:#fname:#
-        #fname = filenames[0]
-        #recid = '258416_20200921-probe0'
-        myinds = np.array([ee for ee,el in enumerate(Units) if el.recid==recid])
-
-        if len(myinds)>5:
-            unitcoords = np.vstack(
-                [[getattr(el, attr) for attr in ['AP', 'DV', 'ML']] for el in Units if el.recid == recid])
-
-            refcoords,refregs = anat_refdict[recid]
-
-            mymat = wmat[myinds]
-            bmus = somh.get_bmus(mymat,weights)
-
-            #myregs = [el.region for el in somElecs if el.recid==recid]
-            #mycoords = coord_mat.T#np.vstack([np.array([el.AP,el.DV,el.ML]) for el in somElecs if el.recid==recid])
-            cdists = helper.calc_succ_dist(refcoords)
-            spacejumps = np.where(cdists > maxd)[0]
-
-            norm = mpl.colors.Normalize(vmin=0, vmax=len(refregs))
-            #cols = [mpl.cm.jet(norm(bb)) for bb in np.arange(len(bmus))]
-
-
-            f,axarr = plt.subplots(1,2,figsize=(fwidth+add_width, fheight),gridspec_kw={'width_ratios':[0.035,1.]})
-            f.subplots_adjust(left=l_w / fwidth+0.09, right=1. - r_w / fwidth, bottom=b_h / fheight,
-                              top=1. - t_h / fheight,wspace=0.05)  # -tspace/float(fheight)
-            if len(np.unique(refregs))==1:
-                f.suptitle('%s %s  %s'%(recid,Units[myinds[0]].task,refregs[0]))
-            else:f.suptitle('%s %s'%(recid,Units[myinds[0]].task))
-            cax,ax = axarr
-
-            somp.plot_hexPanel(kshape,np.zeros(np.prod(kshape)),ax,hw_hex=hw_hex*sizefac,showConn=False,showHexId=show_hexid\
-                                             ,scalefree=True,return_scale=False,alphahex=1.,idcolor='k',quality_map={0:'silver'})#np.zeros(np.prod(kshape))
-            for bb,bmu in enumerate(bmus):
-                coord = unitcoords[bb]
-                coordidx =  int(np.where(np.sum(np.abs(refcoords-coord),axis=1)==0)[0])
-                col = mycmap(norm(coordidx))
-                c = hex_dict[bmu][0]
-                 # - 0.3 * hw_hex
-                ax.plot(c[0]+np.random.uniform(-jit,jit), c[1]+np.random.uniform(-jit,jit),'o',mec=col,mfc='none',ms=10)#+np.random.uniform(-jit,jit,2)np.array(hex_dict[bmu][0]
-            for hexvals in hex_dict.values():
-                ax.plot(hexvals[1][:,0],hexvals[1][:,1],color='grey')
-
-            ax.set_xlim([xmin, xmax])
-            ax.set_ylim([ymin, ymax])
-            ax.set_axis_off()
-
-            cb = mpl.colorbar.ColorbarBase(cax, cmap=mycmap,
-                                                   norm=norm,
-                                                   orientation='vertical')
-            #cb.set_ticks([])
-            cax.set_axis_off()
-            pos = cax.get_position()
-            locax = f.add_axes([pos.x0-0.015, pos.y0, 0.01, pos.height])
-            pb.make_locax(locax, refregs, cols=['k', 'lightgray'], boundary_axes=[], \
-                          lim=[0,len(refregs)])
-            for jump in spacejumps:
-                locax.axhline(jump,color='w',lw=10,zorder=100)
-                cax.axhline(jump,color='w',lw=10,zorder=100)
-            figsaver(f, 'rec_examples/%s_example')
 
 
 
