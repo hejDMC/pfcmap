@@ -98,11 +98,11 @@ extend = 'neither'
 if roi_tag == 'dataRois':
     flatmapfile = str(S.roimap_path)
 elif roi_tag == 'gaoRois':
-    flatmapfile = os.path.join(pathdict['tesselation_dir'],'flatmap_PFCrois.h5')
+    flatmapfile = os.path.join(pathdict['tessellation_dir'],'flatmap_PFCrois.h5')
 else:
     assert 0, 'unknown roi_tag: %s'%roi_tag
 
-region_file = os.path.join(pathdict['tesselation_dir'],'flatmap_PFCregions.h5')
+region_file = os.path.join(pathdict['tessellation_dir'],'flatmap_PFCregions.h5')
 with h5py.File(flatmapfile,'r') as hand:
     polygon_dict= {key: hand[key][()] for key in hand.keys()}
 

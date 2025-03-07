@@ -7,21 +7,14 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import shapely
 from shapely.ops import polylabel
+from importlib import reload
 
-pathpath = 'PATHS/filepaths_carlen.yml'
-myrun = 'runC00dMP3_brain'
+pathpath = 'PATHS/filepaths_IBLTuning.yml'#
+myrun =  'runIBLTuning_utypeP'
 layers = ['5','6']
 
 
-with open(pathpath, 'r') as myfile: pathdict = yaml.safe_load(myfile)
-
-rundict_path = pathdict['configs']['rundicts']
-srcdir = pathdict['src_dirs']['metrics']
-savepath_SOM = pathdict['savepath_SOM']
-
-tessellation_dir = pathdict['tessellation_dir']
-
-figdir_gen = pathdict['figdir_root'] + '/methods/flatmap_tessellation'
+figdir_gen = 'FIGURES/flatmap_tessellation_IBL'
 
 def figsaver(fig, nametag, closeit=True):
     figname = os.path.join(figdir_gen, nametag + '__%s.%s'%(myrun,S.fformat))
@@ -31,30 +24,41 @@ def figsaver(fig, nametag, closeit=True):
     if closeit: plt.close(fig)
 
 
+with open(pathpath, 'r') as myfile: pathdict = yaml.safe_load(myfile)
+tessellation_dir = pathdict['tessellation_dir']
+
+
+rundict_path = pathdict['configs']['rundicts']
+srcdir = pathdict['src_dirs']['metrics']
+
 sys.path.append(pathdict['code']['workspace'])
-from pfcmap.python.utils import unitloader as uloader
-from pfcmap.python import settings as S
-from pfcmap.python.utils import tessellation_tools as ttools
+from pfcmap_paper.utils import unitloader as uloader
+from pfcmap_paper import settings as S
+from pfcmap_paper.utils import tessellation_tools as ttools
 
 
 rundict_folder = os.path.dirname(rundict_path)
 rundict = uloader.get_myrun(rundict_folder,myrun)
-#reftag,layerlist,datasets,tasks,tsel,statetag,utypes,nnodes = [rundict[key] for key in ['reftag','layerlist','datasets','tasks','tsel','state','utypes','nnodes']]
-#wmetrics,imetrics,wmetr_weights,imetr_weights = [rundict[metrtype][mytag] for mytag in ['features','weights'] for metrtype in ['wmetrics','imetrics']]#not strictly necessary: gets called in uloader
 
 
 
 metricsfiles = S.get_metricsfiles_auto(rundict,srcdir,tablepath=pathdict['tablepath'])
 
-Units,somfeats,weightvec =  uloader.load_all_units_for_som(metricsfiles,rundict,check_pfc= (not myrun.count('_brain')),rois_from_path=False)
+reload(uloader)
+Units,somfeats,weightvec =  uloader.load_all_units_for_som(metricsfiles,rundict,check_pfc= True,\
+                                                           rois_from_path=False,check_wavequality=False)
 
 
 
 
 Units_pfc = [U for U in Units if S.check_pfc(U.area)]
 roiless_pfc = [U for U in Units_pfc if U.roi==0]
+roiless2 =  [U for U in Units_pfc if np.sum(np.abs([U.u,U.v]))==0]
 print('N roiless pfc units %i'%(len(roiless_pfc)))
-Units_pfc_sel = [U for U in Units_pfc if S.check_layers(U.layer,layers) and not U.roi==0]
+print('N roiless2 pfc units %i'%(len(roiless2)))
+print('roiless but not zero coordinates (should be empty)' , [U for U in roiless_pfc if not U in roiless2])
+Units_pfc_sel = [U for U in Units_pfc if S.check_layers(U.layer,layers) and not np.sum(np.abs([U.u,U.v]))==0]
+print('N units total: %i'%(len(Units_pfc_sel)))
 #layu = np.unique([U.layer for U in Units_pfc])
 
 
@@ -62,13 +66,14 @@ Units_pfc_sel = [U for U in Units_pfc if S.check_layers(U.layer,layers) and not 
 ####just for plotting
 v_fac = -1
 
-roimage_file = os.path.join(tessellation_dir,'flatmap_PFCregions.h5')
-with h5py.File(roimage_file,'r') as hand:
-    polygon_dict= {key: hand[key][()] for key in hand.keys()}
+region_file = os.path.join(tessellation_dir,'flatmap_PFCregions.h5')
+with h5py.File(region_file, 'r') as hand:
+    regpolygon_dict = {key: hand[key][()] for key in hand.keys()}
+Units_pfc_all = [U for U in Units if S.check_pfc(U.area) and not U.roi==0]
 
 def plot_flatmap(axobj,**kwargs):
-    for key in polygon_dict.keys():
-        points = polygon_dict[key]
+    for key in regpolygon_dict.keys():
+        points = regpolygon_dict[key]
         axobj.plot(points[:, 0], points[:, 1] * v_fac, **kwargs)
 
 
@@ -82,52 +87,45 @@ roiattr = 'roi2'
 sortax = 0
 marg = 0.1
 frac_range=[1-marg,1+marg]
-write_thr = 1500
+write_thr = 1500#np.mean(areas)*0.7#just for display#todo change this once for Pierre
 outline_file = os.path.join(tessellation_dir,'flatmap_PFC_outline.txt')
 with open(outline_file) as myfile:
     mytxt = myfile.readline()
 outcoords = np.array([[subvals.strip().split(' ')] for subvals in mytxt.split(',')]).astype(float)[:, 0, :]
 
+######debugging:
+uareas = np.unique([U.area for U in Units_pfc_sel])
+os.makedirs(os.path.join(figdir_gen,'regional_agreements'))
+for my_area in uareas:
+    myUs = [U for U in Units_pfc_sel if U.area==my_area]
+    #myUs = [U for U in Units if S.check_pfc(U.area) and U.area==my_area]
+    X = np.array([[U.u,U.v] for U in myUs])
 
-region_file = os.path.join(tessellation_dir,'flatmap_PFCregions.h5')
-with h5py.File(region_file, 'r') as hand:
-    regpolygon_dict = {key: hand[key][()] for key in hand.keys()}
-Units_pfc_all = [U for U in Units if S.check_pfc(U.area) and not U.roi==0]
+    f,ax = plt.subplots()
+    ax.plot(X[:, 0], X[:, 1] * v_fac, '.', color='k', alpha=0.3, ms=2)
+    plot_flatmap(ax, color='silver')
+    ax.set_title(my_area)
+    f.savefig(os.path.join(figdir_gen,'regional_agreements/%s_flatmap__%s.png'%(my_area,myrun)))
+    plt.close(f)
+
+X = np.array([[U.u,U.v] for U in Units_pfc_sel])
+
+f,ax = plt.subplots()
+ax.plot(X[:, 0], X[:, 1] * v_fac, '.', color='k', alpha=0.3, ms=2)
+plot_flatmap(ax, color='silver')
+ax.set_title('overall')
+f.savefig(os.path.join(figdir_gen, 'regional_agreements/overall_flatmap__%s.png' % (myrun)))
+plt.close(f)
+
+
+#####debugging end
+mode = 'obeyRegions'
 
 for gensize in gensizes:
     print('gensize %i'%gensize)
-    #do it for the whole outline
-    '''
-    mode = 'free'
-    print('mode %s'%mode)
-
-    X = np.array([[U.u,U.v] for U in Units_pfc])
-
-    midpoints,clustlabels = ttools.get_clusters(X,NperPatch=gensize,frac_range=frac_range) #cluster_centers_*np.array([1,v_fac])
-    rois,vor_polygons = ttools.get_voronoi_polygons_outbounded(midpoints,outcoords)
-    myroidict = ttools.make_roidict(rois,sortax=sortax,reverse=True)
-
-
-    #save it
-
-    roidict_dst = os.path.join(tessellation_dir,'flatmap_PFC_ntesselated_%s_res%i.h5'%(mode,gensize))
-    ttools.save_roidict(roidict_dst,myroidict)
-
-
-
-    #example how to load and assign to units
-    with h5py.File(roidict_dst,'r') as hand:
-        myroidict = {key: hand[key][()] for key in hand.keys()}
-
-
-
-    uloader.assign_roi_to_units(Units_pfc_all,myroidict,roiattr =roiattr)
-    '''
 
     ### now per sub-area!
-    mode = 'obeyRegions'
     print('mode %s'%mode)
-
 
 
     X = np.array([[U.u,U.v] for U in Units_pfc_sel])
@@ -136,6 +134,7 @@ for gensize in gensizes:
     for regkey,regpolycoords in regpolygon_dict.items():
         regpoly = shapely.Polygon(regpolycoords)
         reg_inds = np.array([uu for uu,coords in enumerate(X) if regpoly.contains(shapely.Point(coords))])
+        #print(regkey,reg_inds)
         X_reg = X[reg_inds]
         midpoints,clustlabels = ttools.get_clusters(X_reg,NperPatch=gensize,frac_range=frac_range) #cluster_centers_*np.array([1,v_fac])
         rois,vor_polygons = ttools.get_voronoi_polygons_outbounded(midpoints,regpolycoords)
@@ -146,15 +145,15 @@ for gensize in gensizes:
     myroidict = ttools.make_roidict(allroislist,sortax=sortax,reverse=True)
 
 
-    roidict_dst =  os.path.join(tessellation_dir,'flatmap_PFC_ntesselated_%s_res%i.h5'%(mode,gensize))
+    roidict_dst =  os.path.join(tessellation_dir,'IBLflatmap_PFC_ntesselated_%s_res%i.h5'%(mode,gensize))
     ttools.save_roidict(roidict_dst,myroidict)
 
 
 
-###now the plotting!
+###now the plotting
 for gensize in gensizes:
     for mode in ['obeyRegions']:#,'free'
-        roidict_dst = os.path.join(tessellation_dir,'flatmap_PFC_ntesselated_%s_res%i.h5'%(mode,gensize))
+        roidict_dst = os.path.join(tessellation_dir,'IBLflatmap_PFC_ntesselated_%s_res%i.h5'%(mode,gensize))
 
         with h5py.File(roidict_dst,'r') as hand:
             myroidict = {key: hand[key][()] for key in hand.keys()}
@@ -259,19 +258,3 @@ for gensize in gensizes:
             figsaver(f, '%s/Ngen%i/%s_N%i__counts_%s'%(mode,gensize,mode,gensize,tag.replace('/','_')), closeit=True)
 
 
-'''
-centlist = [roi.centroid for roi in rois]
-centvec = np.array([[cent.x, cent.y] for cent in centlist])
-
-sortinds = np.argsort(centvec[:, sortax])
-sortinds = sortinds[::-1]
-for ii, roi in enumerate(np.array(rois)[sortinds]):
-    xx, yy = roi.exterior.coords.xy
-pgs = list(roi.geoms)
-f,ax = plt.subplots()
-for pg in pgs:
-    xx, yy = pg.exterior.coords.xy
-    ax.plot(np.array(list(xx)),np.array(list(yy))*-1)
-plot_flatmap(ax,color='skyblue',alpha=0.5,lw=2)
-set_mylim(ax)
-'''

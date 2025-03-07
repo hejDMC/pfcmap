@@ -14,7 +14,7 @@ myrun = 'runC00dM3_brain'
 
 with open(pathpath, 'r') as myfile: pathdict = yaml.safe_load(myfile)
 
-tesselation_dir = pathdict['tesselation_dir']
+tessellation_dir = pathdict['tessellation_dir']
 
 rundict_path = pathdict['configs']['rundicts']
 srcdir = pathdict['src_dirs']['metrics']
@@ -50,7 +50,7 @@ Units_pfc = [U for U in Units if S.check_pfc(U.area) and not U.roi==0]
 
 v_fac = -1
 
-roimage_file = os.path.join(tesselation_dir,'flatmap_PFCregions.h5')
+roimage_file = os.path.join(tessellation_dir,'flatmap_PFCregions.h5')
 with h5py.File(roimage_file,'r') as hand:
     polygon_dict= {key: hand[key][()] for key in hand.keys()}
 

@@ -1,0 +1,33 @@
+runIBLTuning_utypeP: #_pj means projection
+    state: ''
+    tsel: ''
+    layerlist: 'all'
+    reftag: 'all'
+    spec: ''
+    datasets: ['IBL']
+    tasks: ['IBL']#
+    imetrics:
+      features: []
+      weights: []
+    wmetrics:
+      features: []#['peak2Trough','abRatio','p2tRatio']
+      weights: []#[1,1,1]
+    nnodes: 0
+    utypes: ['ww']
+
+runIBLTuning_utypeAll: #_pj means projection
+    state: ''
+    tsel: ''
+    layerlist: 'all'
+    reftag: 'all'
+    spec: ''
+    datasets: ['IBL']
+    tasks: ['IBL']#
+    imetrics:
+      features: []
+      weights: []
+    wmetrics:
+      features: []#['peak2Trough','abRatio','p2tRatio']
+      weights: []#[1,1,1]
+    nnodes: 0
+    utypes: 'all'

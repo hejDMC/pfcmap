@@ -25,7 +25,7 @@ figdir_root: 'FIGDIR'
 
 statsdict_dir: 'ZENODOPATH/enrichments'
 
-tesselation_dir: 'ZENODOPATH/flatmaps'
+tessellation_dir: 'ZENODOPATH/flatmaps'
 
 gao_hierarchy_file: 'ZENODOPATH/ROI_Gao_hierarchy_index.csv'
 

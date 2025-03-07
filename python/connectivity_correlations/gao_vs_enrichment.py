@@ -51,8 +51,8 @@ def figsaver(fig, nametag, closeit=True):
 #figsaver
 
 #getting the flatmap files and prepare coloring
-flatmapfile = os.path.join(pathdict['tesselation_dir'],'flatmap_PFCrois.h5')
-region_file = os.path.join(pathdict['tesselation_dir'],'flatmap_PFCregions.h5')
+flatmapfile = os.path.join(pathdict['tessellation_dir'],'flatmap_PFCrois.h5')
+region_file = os.path.join(pathdict['tessellation_dir'],'flatmap_PFCregions.h5')
 with h5py.File(flatmapfile,'r') as hand:
     polygon_dict= {key: hand[key][()] for key in hand.keys()}
 

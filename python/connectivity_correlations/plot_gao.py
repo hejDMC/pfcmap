@@ -18,7 +18,7 @@ genfigdir = pathdict['figdir_root'] + '/hierarchy/gao_correlations'
 gao_hier_path = pathdict['gao_hierarchy_file']
 
 
-flatmapfile = os.path.join(pathdict['tesselation_dir'],'flatmap_PFCrois.h5')
+flatmapfile = os.path.join(pathdict['tessellation_dir'],'flatmap_PFCrois.h5')
 with h5py.File(flatmapfile,'r') as hand:
     polygon_dict= {key: hand[key][()] for key in hand.keys()}
 

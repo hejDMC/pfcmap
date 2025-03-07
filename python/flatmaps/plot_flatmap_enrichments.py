@@ -53,12 +53,12 @@ srcdir = pathdict['src_dirs']['metrics']
 savepath_SOM = pathdict['savepath_SOM']
 
 
-region_file = os.path.join(pathdict['tesselation_dir'],'flatmap_PFCregions.h5')
+region_file = os.path.join(pathdict['tessellation_dir'],'flatmap_PFCregions.h5')
 
 if roi_tag == 'dataRois':
     flatmapfile = str(S.roimap_path)
 elif roi_tag == 'gaoRois':
-    flatmapfile = os.path.join(pathdict['tesselation_dir'],'flatmap_PFCrois.h5')
+    flatmapfile = os.path.join(pathdict['tessellation_dir'],'flatmap_PFCrois.h5')
 else:
     assert 0, 'unknown roi_tag: %s'%roi_tag
 
