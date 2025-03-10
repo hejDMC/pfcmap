@@ -162,8 +162,10 @@ def get_allowed_recids_from_table(tablepath='config/datatables/allrecs_allprobes
     return list(allrecrows[cond_bool].values)
 
 def get_metricsfiles(srcdir,from_table=True,tablepath='config/datatables/allrecs_allprobes.xlsx',sheet='sheet0',not_allowed=['-', '?'],**kwargs):
-    metrics_pool = glob(os.path.join(srcdir,'*'))
     #tablepath = 'config/datatables/allrecs_allprobes.xlsx'
+
+    metrics_pool = glob(os.path.join(srcdir,'*'))
+
     if not from_table:
         return metrics_pool
     else:

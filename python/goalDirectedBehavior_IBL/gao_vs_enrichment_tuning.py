@@ -70,17 +70,6 @@ hvec = np.array([hdict[key] for key in allrois_gao])
 show_theil = False
 show_lsq = True
 
-rundict_path = pathdict['configs']['rundicts']
-srcdir = pathdict['src_dirs']['metrics']
-
-rundict_folder = os.path.dirname(rundict_path)
-rundict = uloader.get_myrun(rundict_folder,myrun)
-
-metricsfiles = S.get_metricsfiles_auto(rundict,srcdir,tablepath=pathdict['tablepath'])
-
-Units, somfeats, weightvec = uloader.load_all_units_for_som(metricsfiles, rundict, check_pfc=True,check_wavequality=False,\
-                                                            rois_from_path=False)
-
 
 replace_dict = {'|deep':'|d','|sup':'|s'}
 def replace_fn(mystr):
