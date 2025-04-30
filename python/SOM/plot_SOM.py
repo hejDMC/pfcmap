@@ -122,7 +122,7 @@ for somfeat in somfeats:
 def get_cmap_and_vminmax(feattag,values):
     if feattag in diverge_dict.keys():
         cmap = ['RdBu_r']
-        dcenter = diverge_dict[feat]
+        dcenter = diverge_dict[feattag]
         vminmax = np.max(np.abs([values.min()-dcenter,values.max()-dcenter]))*np.array([-1,1])+dcenter
     else:
         cmap = ['magma','binary']

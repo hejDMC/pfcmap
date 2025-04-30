@@ -13,7 +13,6 @@ To run the code and for further details, consult the respective README files in 
 
 # Code for Figures
 
-
 ## Figure 1 
 Describing the dataset, contrasting nw and ww units.
 * [Fig1c__plot_raster_and_EMG_from_NWB.jl](julia/Fig1c__plot_raster_and_EMG_from_NWB.jl)
