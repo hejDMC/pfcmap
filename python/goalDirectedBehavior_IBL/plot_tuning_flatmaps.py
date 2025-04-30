@@ -85,12 +85,12 @@ with h5py.File(flatmapfile,'r') as hand:
 cmap_z = ttools.get_scalar_map(mapstr_z, [-zlim, zlim])
 
 
-
+whiten_nonsignif_on_flatmap = False
 def get_enr(sdict2):
     signif_idx = np.where(sdict2['avals2']=='signif')[0]
     mean_shuff, std_shuff = [sdict2[key] for key in ['meanshuff', 'stdshuff']]
     zmat = (sdict2['matches'] - mean_shuff) / std_shuff
-    zmat[sdict2['levels'] == 0] = 0
+    if whiten_nonsignif_on_flatmap: zmat[sdict2['levels'] == 0] = 0
     return zmat[:,signif_idx]
 
 allcounts_signif = np.hstack([plotdicts[attr]['matches'][:,np.where(plotdicts[attr]['avals2']=='signif')[0]][:,0] for attr in tuning_attr_names])

@@ -210,7 +210,7 @@ cfndict = cfns.get_cfn_dict()
 clustfn = cfndict[cmethod]
 evalfns = cfns.get_evalfn_dict()
 clustcmap = 'jet'
-
+whiten_nonsignif_on_flatmap = False
 for basetag in ['levels','emat_zerod','emat']:
 
     for reftag in reftags:
@@ -308,7 +308,7 @@ for basetag in ['levels','emat_zerod','emat']:
                 # plot the zmat on the flatmap
                 mean_shuff, std_shuff = [sdict[key] for key in ['meanshuff', 'stdshuff']]
                 zmat = (sdict['matches'] - mean_shuff) / std_shuff
-                zmat[sdict['levels'] == 0] = np.nan
+                if whiten_nonsignif_on_flatmap: zmat[sdict['levels'] == 0] = np.nan
                 plotdict_z = {roi.split('|')[0]:zmat[rr] for rr,roi in enumerate(sdict['alabels'])}
                 cmap_z = ttools.get_scalar_map(mapstr_z,[-zlim,zlim])
 

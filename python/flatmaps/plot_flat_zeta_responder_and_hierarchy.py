@@ -276,7 +276,7 @@ zlim = 8
 #for hier:
 show_theil = False
 show_lsq = True
-
+whiten_nonsignif_on_flatmap = False
 for reftag in reftags:
     for thistag in unique_roiruns:
         #thistag = seltags[0]
@@ -292,7 +292,7 @@ for reftag in reftags:
         # plot the zmat on the flatmap
         mean_shuff, std_shuff = [sdict[key] for key in ['meanshuff', 'stdshuff']]
         zmat = (sdict['matches'] - mean_shuff) / std_shuff
-        zmat[sdict['levels'] == 0] = np.nan
+        if whiten_nonsignif_on_flatmap: zmat[sdict['levels'] == 0] = np.nan
         plotdict_z = {roi.split('|')[0]: zmat[rr] for rr, roi in enumerate(sdict['alabels'])}
         cmap_z = ttools.get_scalar_map(mapstr_z, [-zlim, zlim])
 
