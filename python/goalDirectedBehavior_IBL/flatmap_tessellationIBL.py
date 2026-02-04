@@ -224,7 +224,7 @@ for gensize in gensizes:
         plot_flatmap(ax,color='silver')
         set_mylim(ax)
         ax.set_axis_off()
-        figsaver(f, '%s/Ngen%i/%s_N%i__units_assigend'%(mode,gensize,mode,gensize), closeit=True)
+        figsaver(f, '%s/Ngen%i/%s_N%i__units_assigned'%(mode,gensize,mode,gensize), closeit=True)
 
 
 

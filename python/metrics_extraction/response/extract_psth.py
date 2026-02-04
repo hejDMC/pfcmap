@@ -32,7 +32,7 @@ sys.path.append(pdict['workspace_dir'])
 from pfcmap.python.utils import data_classes as dc
 from pfcmap.python.utils import data_handling as dh
 
-figpath = pdict['fig_path']+'/psth'
+figpath = os.path.join(pdict['fig_path'], 'psth')
 
 cfgpath,dspath = dc.get_paths('Passive',pdict)#N.B.: we do not need specific configs for the other types of datasets
 
@@ -64,6 +64,7 @@ nspikes = np.zeros(len(uids))
 for uu,uid in enumerate(uids):
     spiketimes = unitdict[uid]
     rastermat = np.empty((0,2))
+    psth_unit = np.zeros((len(tints),len(psth_tvec)))
     for tt,tint in enumerate(tints):
         stimes = spiketimes[(spiketimes >= tint[0]) & (spiketimes <= tint[1])] - prestim - tint[0]
         nspikes[uu] = len(stimes)
@@ -74,7 +75,8 @@ for uu,uid in enumerate(uids):
             psth_s = np.convolve( psth_temp, gauss_kernel, mode='same' )
         else:
             psth_s = psth_tvec*np.nan
-        psth_mat[uu] = psth_s
+        psth_unit[tt] = psth_s
+    psth_mat[uu] = np.nanmean(psth_unit,axis=0)
 
 
 
