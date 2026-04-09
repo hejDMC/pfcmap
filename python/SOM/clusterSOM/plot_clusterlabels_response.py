@@ -129,7 +129,7 @@ for recid in recids:
     psth_cut = psth_normed[:,(psth_tvec<=tbound[1])&(psth_tvec>=[tbound[0]])]
     recUs = [U for U in Units if U.recid==recid]
     for U in recUs:
-        uidx = int(np.where(huids==U.uid)[0])
+        uidx = int(np.where(huids==U.uid)[0][0])
         U.set_feature('psth',psth_cut[uidx])
 
 ####END PSTH PREP

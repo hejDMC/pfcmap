@@ -1,3 +1,5 @@
+import sys
+
 import h5py
 import numpy as np
 import re
@@ -121,8 +123,19 @@ def get_units_from_metricsfile(filename,anat_feats='all',imetrics='all',wavemetr
 
         for feat in anat_feats:
             if feat == 'roi':
-                collection_dict[feat] = hand['anatomy/%s'%feat][()].astype(int)
-            else: collection_dict[feat] = hand['anatomy/%s'%feat][()]
+                try:
+                    collection_dict[feat] = hand['anatomy/%s'%feat][()].astype(int)
+                except ValueError:
+                    collection_dict[feat] = hand['anatomy/%s'%feat][()]
+            else : 
+                try:
+                    collection_dict[feat] = hand['anatomy/%s'%feat][()]
+                except KeyError:
+                    try:
+                        collection_dict[feat] = hand['anatomy/%s'%feat.upper()][()]
+                    except KeyError:
+                        collection_dict[feat] = hand['anatomy/roi'][()]
+
         if get_unittype:
             #print (hand.filename)
             for feat in S.unittype_options:
@@ -175,14 +188,17 @@ def get_units_from_metricsfile(filename,anat_feats='all',imetrics='all',wavemetr
         U.set_feature('quality', collection_dict['quality'][uu])
 
         if len(imetrics)>0: set_imetrics(U,uu)
-        U.get_area_and_layer()
+        if dataset == 'Pete_Rudebeck':
+            U.area, U.layer = U.region, 'unknown'
+        else:
+            U.get_area_and_layer()
         if get_unittype:
             set_boolstr(U,uu,S.unittype_options,collection_dict,featname='utype',na_tag='na')
         #if filterfn(U) and len(rfeats)==0:
         #    Units += [U]
         #elif filterfn(U) and ~np.isnan(getattr(U,rfeats[0])):
         #    Units += [U]
-        if filterfn(U):
+        if dataset == 'Pete_Rudebeck' or filterfn(U):
             Units += [U]
         #else:
         #    print('%s discarding %i quality%i'%(os.path.basename(filename),uid,U.wavequality))
@@ -380,6 +396,12 @@ def get_tintfile_rec(recid,dataset,rundict,metricsextr_path =S.metricsextr_path)
 
     elif dataset.count('IBL'):
         tintfilepath = os.path.join(metricsextr_path, 'timeselections', 'timeselections_IBL_Passive')
+        tintfile = glob(os.path.join(tintfilepath, '%s*__TSEL%s%s.h5' % (recid, rundict['tsel'],rundict['spec'].replace('dur',''))))
+        assert len(tintfile) == 1, 'not exactly one tintfile %s'%(str(tintfile))
+        tintfile = tintfile[0]
+        
+    elif dataset.count('Pete_Rudebeck'):
+        tintfilepath = os.path.join(metricsextr_path, 'timeselections', 'timeselections_Rudebeck')
         tintfile = glob(os.path.join(tintfilepath, '%s*__TSEL%s%s.h5' % (recid, rundict['tsel'],rundict['spec'].replace('dur',''))))
         assert len(tintfile) == 1, 'not exactly one tintfile %s'%(str(tintfile))
         tintfile = tintfile[0]

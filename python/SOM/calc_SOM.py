@@ -4,7 +4,11 @@ import os
 import numpy as np
 
 
-
+'''
+Arguments : 
+    - pathpath : path to the YAML file containing the paths for all relevant folders (usually of the form PATH/YAML_filename.yml)
+    - myrun : name of the settings entry from 'the YAML files contained in config/somsettings folder'
+'''
 
 pathpath,myrun = sys.argv[1:]
 #pathpath = 'PATHS/filepaths_carlen.yml'

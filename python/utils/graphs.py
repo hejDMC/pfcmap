@@ -386,7 +386,9 @@ def make_clusterlabels_as_bgrnd(axarr,com_labelvec,cdict_com,aw_frac=1/10.,which
             ax.set_ylabel('')
             ax.set_yticks(np.arange(ny))
             ax.set_yticklabels([])
-            ax.get_shared_y_axes().join(ax, ax2)
+            #check if axes are shared, if not, share them
+            if not ax.get_shared_y_axes().joined(ax, ax2):
+                ax2.sharey(ax)
         elif which == 'x':
             ah = pos.height *aw_frac
             ax2 = ax.get_figure().add_axes([pos.x0 , pos.y0- ah - 0.3 * ah, pos.width,ah])  # [left, bottom, width, height]
@@ -396,7 +398,8 @@ def make_clusterlabels_as_bgrnd(axarr,com_labelvec,cdict_com,aw_frac=1/10.,which
             ax.set_xlabel('')
             ax.set_xticks(np.arange(ny))
             ax.set_xticklabels([])
-            ax.get_shared_x_axes().join(ax, ax2)
+            if not ax.get_shared_x_axes().joined(ax, ax2):
+                ax2.sharex(ax)
 
         ax2.set_axis_off()
 

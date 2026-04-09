@@ -20,7 +20,8 @@ frac_fn = lambda sdict: sdict['matches']/sdict['matches'].sum(axis=1)[:,None]
 
 
 src_acquistion_types = {'Carlen':'table',\
-                        'IBL_Passive':'glob'}
+                        'IBL_Passive':'glob',\
+                        'Pete_Rudebeck':'glob'}
 
 fformat = 'svg'
 
@@ -35,13 +36,14 @@ Nmin_maps = 20
 niter = 200
 
 ntints_min = 12
-metricsextr_path =  'ZENODOPATH/preprocessing/metrics_extraction'
+ZENODOPATH = 'D:/Carlen/Intermediate'
+metricsextr_path =  os.path.join(ZENODOPATH, 'preprocessing', 'metrics_extraction')
 
-response_path = 'ZENODOPATH/preprocessing/metrics_extraction/psth_scores'
+response_path = os.path.join(ZENODOPATH, 'preprocessing', 'metrics_extraction', 'psth_scores')
 responsefile_pattern = 'RECID__TSELpsth2to7__STATEmystate__all_psth_ks10__PCAscoresMODE.h5'#--> replace recid, mystate,MODE
 responsetint_pattern =  'RECID__TSELpsth2to7__STATEmystateREFTAG.h5'
 
-roimap_path = 'ZENODOPATH/flatmaps/flatmap_PFC_ntesselated_obeyRegions_res200.h5'\
+roimap_path = os.path.join(ZENODOPATH, 'flatmaps', 'flatmap_PFC_ntesselated_obeyRegions_res200.h5')
 
 
 
@@ -118,6 +120,11 @@ cdict_pfc = {'MOs':'#4B6A2E','ACAd':'#E8CD00', 'ACAv':'#E5A106', 'PL':'#CE6161',
 
 PFC_sorted = ['MOs','ACAd', 'ACAv', 'PL','ILA', 'ORBm', 'ORBvl','ORBl','FRP','AId','AIv']
 
+cdict_pfc_NHP = {"12r":"#63bd5aff","12l":"#d77471ff","12o":"#abd6a0ff","12m":"#e17178ff","13l":"#4d8842ff",\
+                 "13m":"#5ebb54ff","11m":"#e19fabff","46d":"#e1373dff",\
+                 "46v":"#e1373dff","8A":"#e1373dff","8B":"#458f46ff","9d":"#e1a2afff",\
+                 "9m":"#4a9042ff","24c":"#3c66aeff","6DR":"#549ecfff","6DC":"#549ecfff","Ia":"#549ecfff"}
+
 cdict_task = {'Passive':"#004194", 'Opto':"#56dada",'Aversion':"hotpink", 'Detection':"forestgreen",'Context':'yellowgreen','IBL':'khaki',\
               'Attention':'gold'}#"#98634c""#ff5db8"
 cdict_ds = {'Carlen':'mediumorchid','IBL':'darkkhaki'}
@@ -152,7 +159,7 @@ def get_metricsfiles_auto(rundict,srcdir,**kwargs):
 
 def get_allowed_recids_from_table(tablepath='config/datatables/allrecs_allprobes.xlsx',sheet='sheet0',not_allowed=['-', '?']):
     df = pd.read_excel(tablepath, sheet_name=sheet)
-    df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+    df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
     allrecrows = df['recid']
     isrec_bool = allrecrows.str.contains('probe',na=False)
     allowed_bool = ~df['usable_gen'].isin(not_allowed)

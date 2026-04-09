@@ -20,7 +20,7 @@ plotvars = ['rate','B','LvR','M']
 varselection = ['M', 'B', 'Lv', 'LvR', 'CV2', 'IR', 'Rho']
 allvarnames = varselection + ['rate']
 
-figpath = 'FIGDIR/preprocessing/meanvar_evolution'
+figpath = 'D:/Carlen/Figures/preprocessing/meanvar_evolution'
 stimplotdir =  'config/stimplotstyles'
 recretrieval_paths = 'PATHS/general_paths.yml'
 stylepath = 'config/presentation.mplstyle'

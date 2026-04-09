@@ -130,7 +130,7 @@ for ff,somfeat in enumerate(somfeats):
     for cc in np.arange(ncl):
         tlabs[cc].set_color(cdict_clust[cc])
     if somfeat in diverge_dict:
-        abslim = np.max(np.abs([scoremat[ff].min(),scoremat[ff].max()]))+0.02
+        abslim = np.max(np.abs([np.nanmin(scoremat[ff]),np.nanmax(scoremat[ff])]))+0.02
         ax.set_ylim([-abslim,abslim])
         ax.axhline(0,color='silver',zorder=-10)
         ax.yaxis.set_major_locator(mpl.ticker.MultipleLocator(0.2))
@@ -173,6 +173,7 @@ if not myrun.count('IBL'):
         for lab in np.unique(labels):
             protovals = featvals[labels==lab]
             unitvals = np.array([getattr(U,feat) for U in Units if U.clust==lab])
+            unitvals = unitvals[~np.isnan(unitvals)]
             hist,bins = np.histogram(unitvals,n_binsU)
             bw = np.diff(bins)[0]
             plotvals = filt.savitzky_golay(hist,7,3) if sg_on else hist[:]
